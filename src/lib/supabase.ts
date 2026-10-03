@@ -1,14 +1,39 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+export function normalizeSupabaseUrl(raw: string | undefined): string {
+  if (!raw) return "";
+  let url = raw.trim().replace(/^["']|["']$/g, "");
+  url = url.replace(/\/+$/, "");
+  url = url.replace(/\/rest\/v1\/?$/, "");
+  url = url.replace(/\/+$/, "");
+  return url;
+}
+
+export function normalizeSupabaseKey(raw: string | undefined): string {
+  if (!raw) return "";
+  return raw.trim().replace(/^["']|["']$/g, "");
+}
+
+function getResolvedConfig() {
+  const url = normalizeSupabaseUrl(
+    process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL
+  );
+  const serviceKey = normalizeSupabaseKey(
+    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY
+  );
+  const anonKey = normalizeSupabaseKey(
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
+  );
+
+  return { url, serviceKey, anonKey };
+}
 
 export const isSupabaseConfigured = (): boolean => {
+  const { url, serviceKey, anonKey } = getResolvedConfig();
   return Boolean(
-    supabaseUrl &&
-    supabaseUrl.startsWith("http") &&
-    (supabaseServiceKey || supabaseAnonKey)
+    url &&
+    url.startsWith("http") &&
+    (serviceKey || anonKey)
   );
 };
 
@@ -18,8 +43,9 @@ let supabaseAdminInstance: SupabaseClient | null = null;
 export function getSupabaseAdmin(): SupabaseClient | null {
   if (!isSupabaseConfigured()) return null;
   if (!supabaseAdminInstance) {
-    const key = supabaseServiceKey || supabaseAnonKey;
-    supabaseAdminInstance = createClient(supabaseUrl, key, {
+    const { url, serviceKey, anonKey } = getResolvedConfig();
+    const key = serviceKey || anonKey;
+    supabaseAdminInstance = createClient(url, key, {
       auth: {
         persistSession: false,
         autoRefreshToken: false,
@@ -33,9 +59,10 @@ export function getSupabaseAdmin(): SupabaseClient | null {
 let supabaseAnonInstance: SupabaseClient | null = null;
 
 export function getSupabaseAnon(): SupabaseClient | null {
-  if (!isSupabaseConfigured() || !supabaseAnonKey) return null;
+  const { url, anonKey } = getResolvedConfig();
+  if (!url || !anonKey) return null;
   if (!supabaseAnonInstance) {
-    supabaseAnonInstance = createClient(supabaseUrl, supabaseAnonKey);
+    supabaseAnonInstance = createClient(url, anonKey);
   }
   return supabaseAnonInstance;
 }

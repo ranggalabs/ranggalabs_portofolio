@@ -71,8 +71,13 @@ export function ProjectEditor({ initialData, isNew = false }: ProjectEditorProps
   );
 
   const [newTechInput, setNewTechInput] = useState("");
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const setToastMessage = (msg: string | null) => {
+    if (!msg) setToast(null);
+    else setToast({ type: "success", message: msg });
+  };
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [autoSlug, setAutoSlug] = useState(isNew);
 
   // Cover & Gallery Media Upload States & Refs
@@ -319,10 +324,28 @@ export function ProjectEditor({ initialData, isNew = false }: ProjectEditorProps
     }
   };
 
-  const handleDelete = () => {
-    if (initialData?.id) {
-      deleteProject(initialData.id);
-      router.push("/admin/projects");
+  const handleDelete = async () => {
+    if (!initialData?.id) return;
+    setIsDeleting(true);
+    try {
+      await deleteProject(initialData.id);
+      setToast({
+        type: "success",
+        message: `Project "${formData.title}" berhasil dihapus secara permanen.`,
+      });
+      setShowDeleteModal(false);
+      setTimeout(() => {
+        router.push("/admin/projects");
+      }, 600);
+    } catch (err: any) {
+      console.error("Gagal menghapus project:", err);
+      setToast({
+        type: "error",
+        message: err.message || "Gagal menghapus project dari database.",
+      });
+      setShowDeleteModal(false);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -353,11 +376,11 @@ export function ProjectEditor({ initialData, isNew = false }: ProjectEditorProps
         }
       />
 
-      {toastMessage && (
+      {toast && (
         <Toast
-          type="success"
-          message={toastMessage}
-          onClose={() => setToastMessage(null)}
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
         />
       )}
 
@@ -1083,11 +1106,14 @@ export function ProjectEditor({ initialData, isNew = false }: ProjectEditorProps
       {/* Delete Confirmation Modal */}
       <Modal
         isOpen={showDeleteModal}
-        onClose={() => setShowDeleteModal(false)}
+        onClose={() => {
+          if (!isDeleting) setShowDeleteModal(false);
+        }}
         title="Delete Project"
         description={`Are you sure you want to permanently delete "${formData.title}"?`}
-        confirmText="Confirm Delete"
+        confirmText={isDeleting ? "Deleting..." : "Confirm Delete"}
         confirmVariant="danger"
+        isConfirmLoading={isDeleting}
         onConfirm={handleDelete}
       />
 

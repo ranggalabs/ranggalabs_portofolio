@@ -1,45 +1,6 @@
 {
   "projects": [
     {
-      "id": "proj-1790663026374",
-      "title": "contoh123",
-      "slug": "contoh123",
-      "summary": "contoh123456",
-      "coverImage": "/uploads/1790663035862-slide_1.png",
-      "coverAlt": "slide_1",
-      "category": "fullstack",
-      "categoryDisplay": "FULLSTACK",
-      "role": "Fullstack Developer",
-      "year": "2026",
-      "clientName": "contoh123",
-      "clientType": "Commercial / Enterprise",
-      "techStack": [
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "Next123"
-      ],
-      "liveUrl": "https://www.linkedin.com/in/ranggaprasetya/",
-      "repoUrl": "https://www.threads.com/?hl=id",
-      "problem": "contoh1111",
-      "solution": "contoh123",
-      "result": "contoh1111",
-      "metrics": [
-        {
-          "id": "m1",
-          "label": "Performance Gain",
-          "value": "+45%"
-        }
-      ],
-      "gallery": [],
-      "featured": false,
-      "order": 1,
-      "status": "published",
-      "seoTitle": "",
-      "seoDescription": "",
-      "updatedAt": "2026-09-29"
-    },
-    {
       "id": "proj-1",
       "title": "Angkot To School (DISHUB Kota Bandung)",
       "slug": "angkot-to-school",
