@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import {
@@ -14,12 +12,11 @@ import {
 import { TopNav } from "@/components/layout/TopNav";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
-import { TechChip } from "@/components/ui/TechChip";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { usePortfolio } from "@/context/PortfolioContext";
+import { db } from "@/lib/db";
 
-export default function AboutPage() {
-  const { profile } = usePortfolio();
+export default async function AboutPage() {
+  const profile = await db.getProfile();
 
   const experiences =
     profile.experiences && profile.experiences.length > 0

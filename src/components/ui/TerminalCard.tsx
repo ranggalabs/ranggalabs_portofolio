@@ -11,11 +11,11 @@ export function TerminalCard() {
           <div className="w-3 h-3 rounded-full bg-[var(--border)] hover:bg-yellow-400 transition-colors" />
           <div className="w-3 h-3 rounded-full bg-[var(--border)] hover:bg-green-400 transition-colors" />
         </div>
-        <div className="flex items-center gap-1.5 text-[var(--text-muted)] text-[11px] tracking-wide">
+        <div className="flex items-center gap-1.5 text-[var(--text)] text-xs font-medium tracking-wide">
           <Terminal className="w-3.5 h-3.5 stroke-[1.75]" />
           <span>rangga@station: ~/portfolio</span>
         </div>
-        <span className="text-[11px] text-[var(--text-muted)]">zsh</span>
+        <span className="text-xs font-medium text-[var(--text-muted)]">zsh</span>
       </div>
 
       {/* Terminal Body */}
@@ -24,32 +24,32 @@ export function TerminalCard() {
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-2 text-[var(--text)]">
             <span className="text-[var(--primary)] font-semibold">$</span>
-            <span className="text-[var(--text-muted)]">cat profile.json</span>
+            <span className="text-[var(--text)] font-medium">cat profile.json</span>
           </div>
 
-          <div className="pl-3 border-l-2 border-[var(--border)] flex flex-col gap-1 text-[11px] text-[var(--text-muted)]">
+          <div className="pl-3 border-l-2 border-[var(--border)] flex flex-col gap-1 text-xs">
             <div>
-              <span className="text-[var(--primary)]">"name"</span>:{" "}
+              <span className="text-[var(--primary)] font-medium">"name"</span>:{" "}
               <span className="text-[var(--text)]">"Rangga Prasetya"</span>,
             </div>
             <div>
-              <span className="text-[var(--primary)]">"role"</span>:{" "}
+              <span className="text-[var(--primary)] font-medium">"role"</span>:{" "}
               <span className="text-[var(--text)]">"Fullstack Developer"</span>,
             </div>
             <div>
-              <span className="text-[var(--primary)]">"location"</span>:{" "}
+              <span className="text-[var(--primary)] font-medium">"location"</span>:{" "}
               <span className="text-[var(--text)]">"Bandung, Indonesia (UTC+7)"</span>,
             </div>
             <div>
-              <span className="text-[var(--primary)]">"stack"</span>: [
+              <span className="text-[var(--primary)] font-medium">"stack"</span>: [
               <span className="text-[var(--text)]">"TypeScript"</span>,{" "}
               <span className="text-[var(--text)]">"Go"</span>,{" "}
               <span className="text-[var(--text)]">"ESP32"</span>,{" "}
               <span className="text-[var(--text)]">"PostgreSQL"</span>],
             </div>
             <div>
-              <span className="text-[var(--primary)]">"status"</span>:{" "}
-              <span className="text-[var(--success)] font-medium">"ready_for_dispatch"</span>
+              <span className="text-[var(--primary)] font-medium">"status"</span>:{" "}
+              <span className="text-[var(--success)] font-semibold">"ready_for_dispatch"</span>
             </div>
           </div>
         </div>
@@ -58,11 +58,11 @@ export function TerminalCard() {
         <div className="flex flex-col gap-1.5 pt-1">
           <div className="flex items-center gap-2">
             <span className="text-[var(--primary)] font-semibold">$</span>
-            <span className="text-[var(--text-muted)]">
+            <span className="text-[var(--text)] font-medium">
               curl -s https://api.rangga.dev/health
             </span>
           </div>
-          <div className="flex items-center gap-2 text-[11px] text-[var(--success)] bg-[var(--surface-2)] px-3 py-1.5 rounded-md border border-[var(--border)]">
+          <div className="flex items-center gap-2 text-xs font-semibold text-[var(--success)] bg-[var(--surface-2)] px-3 py-1.5 rounded-md border border-[var(--border)]">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--success)] animate-pulse" />
             <span>{`{"status":"healthy","uptime":"99.99%","ping":"18ms"}`}</span>
           </div>

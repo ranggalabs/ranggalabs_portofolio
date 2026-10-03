@@ -9,14 +9,38 @@ import {
   MediaItem,
   Inquiry,
 } from "@/types";
-import {
-  initialProjects,
-  initialProfile,
-  initialResumeSettings,
-  initialSiteSettings,
-  initialMediaItems,
-  initialInquiries,
-} from "@/data/initialData";
+
+const defaultProfile: Profile = {
+  name: "Rangga Prasetya",
+  headline: "Fullstack Developer & IoT Engineer",
+  bio: "",
+  photo: "/images/profile_rangga-7ca715.png",
+  location: "Bandung, Indonesia",
+  email: "rangga@dealwithrangga.my.id",
+  phone: "+62 812-3456-7890",
+  github: "https://github.com/ranggaprasetya",
+  linkedin: "https://linkedin.com/in/ranggaprasetya",
+  availability: "Available for contract",
+  isAvailable: true,
+  socialLinks: [],
+};
+
+const defaultResumeSettings: ResumeSettings = {
+  versionLabel: "v2024.2",
+  fileName: "CV_Rangga_Prasetya_Fullstack.pdf",
+  publicUrl: "/CV_Rangga_Prasetya_Fullstack.pdf",
+  fileSize: "1.2 MB",
+  updatedAt: "October 2024",
+};
+
+const defaultSiteSettings: SiteSettings = {
+  siteName: "Rangga Prasetya Portfolio",
+  siteUrl: "https://dealwithrangga.my.id",
+  defaultSeoTitle: "Rangga Prasetya — Fullstack Developer",
+  defaultSeoDescription: "Fullstack developer portfolio",
+  defaultOgImage: "/images/angkot_to_school-63d994.png",
+  contactEmail: "rangga@dealwithrangga.my.id",
+};
 
 interface PortfolioContextType {
   projects: Project[];
@@ -61,12 +85,12 @@ export function PortfolioProvider({
   children: React.ReactNode;
   initialData?: PortfolioInitialData;
 }) {
-  const [projects, setProjects] = useState<Project[]>(() => initialData?.projects || initialProjects);
-  const [profile, setProfile] = useState<Profile>(() => initialData?.profile || initialProfile);
-  const [resumeSettings, setResumeSettings] = useState<ResumeSettings>(() => initialData?.resumeSettings || initialResumeSettings);
-  const [siteSettings, setSiteSettings] = useState<SiteSettings>(() => initialData?.siteSettings || initialSiteSettings);
-  const [mediaItems, setMediaItems] = useState<MediaItem[]>(() => initialData?.mediaItems || initialMediaItems);
-  const [inquiries, setInquiries] = useState<Inquiry[]>(() => initialData?.inquiries || initialInquiries);
+  const [projects, setProjects] = useState<Project[]>(() => initialData?.projects || []);
+  const [profile, setProfile] = useState<Profile>(() => initialData?.profile || defaultProfile);
+  const [resumeSettings, setResumeSettings] = useState<ResumeSettings>(() => initialData?.resumeSettings || defaultResumeSettings);
+  const [siteSettings, setSiteSettings] = useState<SiteSettings>(() => initialData?.siteSettings || defaultSiteSettings);
+  const [mediaItems, setMediaItems] = useState<MediaItem[]>(() => initialData?.mediaItems || []);
+  const [inquiries, setInquiries] = useState<Inquiry[]>(() => initialData?.inquiries || []);
   const [isLoading, setIsLoading] = useState(true);
 
   // Sync state if server passes updated initialData on navigation
@@ -352,12 +376,7 @@ export function PortfolioProvider({
   };
 
   const resetToDefault = () => {
-    setProjects(initialProjects);
-    setProfile(initialProfile);
-    setResumeSettings(initialResumeSettings);
-    setSiteSettings(initialSiteSettings);
-    setMediaItems(initialMediaItems);
-    setInquiries(initialInquiries);
+    refreshData();
   };
 
   return (

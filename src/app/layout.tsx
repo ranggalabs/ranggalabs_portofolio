@@ -2,18 +2,19 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { AppProviders } from "@/components/providers/AppProviders";
-import { db } from "@/lib/db";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+  preload: true,
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-mono",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -86,29 +87,11 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  let initialData = undefined;
-  try {
-    const [profile, projects, resumeSettings, siteSettings] = await Promise.all([
-      db.getProfile(),
-      db.getProjects({ status: "all" }),
-      db.getResume(),
-      db.getSettings(),
-    ]);
-    initialData = {
-      profile,
-      projects,
-      resumeSettings,
-      siteSettings,
-    };
-  } catch (err) {
-    console.error("RootLayout failed to retrieve initial db data:", err);
-  }
-
   return (
     <html
       lang="en"
@@ -119,7 +102,7 @@ export default async function RootLayout({
         <link rel="icon" href="/images/ranggalabs.png" sizes="any" />
       </head>
       <body className="min-h-screen flex flex-col font-sans antialiased bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--primary)] selection:text-[var(--on-primary)]">
-        <AppProviders initialData={initialData}>{children}</AppProviders>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { AdminSidebar } from "@/components/layout/AdminSidebar";
+import { PortfolioProvider } from "@/context/PortfolioContext";
 
 export default function AdminLayout({
   children,
@@ -54,11 +55,13 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-[var(--bg)] text-[var(--text)]">
-      <AdminSidebar />
-      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        {children}
+    <PortfolioProvider>
+      <div className="flex min-h-screen bg-[var(--bg)] text-[var(--text)]">
+        <AdminSidebar />
+        <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+          {children}
+        </div>
       </div>
-    </div>
+    </PortfolioProvider>
   );
 }
