@@ -27,7 +27,9 @@ export async function GET(req: NextRequest) {
       search,
     });
 
-    return apiResponse.success(projects, { total: projects.length });
+    const res = apiResponse.success(projects, { total: projects.length });
+    res.headers.set("Cache-Control", "no-store, max-age=0, must-revalidate");
+    return res;
   } catch (e: any) {
     return apiResponse.error("INTERNAL_ERROR", e.message, undefined, 500);
   }

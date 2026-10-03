@@ -107,12 +107,12 @@ export function PortfolioProvider({
     try {
       const [projRes, mediaRes, profRes, resumeRes, setRes, inqRes] =
         await Promise.allSettled([
-          fetch("/api/projects?status=all").then((r) => r.ok ? r.json() : null),
-          fetch("/api/media").then((r) => r.ok ? r.json() : null),
-          fetch("/api/profile").then((r) => r.ok ? r.json() : null),
-          fetch("/api/resume").then((r) => r.ok ? r.json() : null),
-          fetch("/api/settings").then((r) => r.ok ? r.json() : null),
-          fetch("/api/inquiries").then((r) => r.ok ? r.json() : null),
+          fetch(`/api/projects?status=all&_t=${Date.now()}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : null),
+          fetch(`/api/media?_t=${Date.now()}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : null),
+          fetch(`/api/profile?_t=${Date.now()}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : null),
+          fetch(`/api/resume?_t=${Date.now()}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : null),
+          fetch(`/api/settings?_t=${Date.now()}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : null),
+          fetch(`/api/inquiries?_t=${Date.now()}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : null),
         ]);
 
       if (projRes.status === "fulfilled" && projRes.value?.success && projRes.value?.data) {
@@ -203,17 +203,24 @@ export function PortfolioProvider({
     }
   };
 
-  const deleteProject = async (id: string) => {
-    // Optimistic UI update
-    setProjects((prev) => prev.filter((p) => p.id !== id));
+  const deleteProject = async (id: string): Promise<void> => {
+    const res = await fetch(`/api/projects/${id}`, {
+      method: "DELETE",
+      headers: { "Cache-Control": "no-cache" },
+    });
 
-    try {
-      await fetch(`/api/projects/${id}`, {
-        method: "DELETE",
-      });
-    } catch (err) {
-      console.error(`Failed to delete project ${id} from backend:`, err);
+    const json = await res.json().catch(() => null);
+
+    if (!res.ok || !json?.success) {
+      const errorMsg =
+        json?.error?.message ||
+        `Gagal menghapus project dari server (HTTP ${res.status}).`;
+      console.error("Delete project server response error:", json);
+      throw new Error(errorMsg);
     }
+
+    // Only update local state if backend deletion succeeded
+    setProjects((prev) => prev.filter((p) => p.id !== id && p.slug !== id));
   };
 
   const updateProfile = async (updated: Profile) => {

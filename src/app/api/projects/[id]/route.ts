@@ -91,15 +91,23 @@ export async function DELETE(
       try {
         revalidatePath("/");
         revalidatePath("/projects");
+        revalidatePath(`/projects/${existing.slug}`);
+        revalidatePath("/admin/projects");
         revalidatePath("/sitemap.xml");
       } catch (revalidateErr) {
         console.warn("ISR revalidation warning:", revalidateErr);
       }
-      return apiResponse.success({ deleted: true, id: existing.id });
+      return apiResponse.success({ deleted: true, id: existing.id, title: existing.title });
     }
 
-    return apiResponse.error("DELETE_FAILED", "Could not delete project.", undefined, 500);
+    return apiResponse.error(
+      "DELETE_FAILED",
+      "Tidak dapat menghapus project dari database. Baris tidak ditemukan atau hak akses Supabase dibatasi.",
+      undefined,
+      500
+    );
   } catch (e: any) {
-    return apiResponse.error("INTERNAL_ERROR", e.message, undefined, 500);
+    console.error("API DELETE project exception:", e);
+    return apiResponse.error("INTERNAL_ERROR", e.message || "Gagal memproses penghapusan project.", undefined, 500);
   }
 }

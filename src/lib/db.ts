@@ -482,20 +482,55 @@ export const db = {
     if (isSupabaseConfigured()) {
       const supabase = getSupabaseAdmin();
       if (supabase) {
-        const { error } = await supabase.from("projects").delete().eq("id", id);
-        if (!error) {
-          const data = ensureDb();
-          data.projects = data.projects.filter((p) => p.id !== id);
-          writeDb(data);
+        // Try deleting by primary key id
+        const { data: byIdData, error: byIdError } = await supabase
+          .from("projects")
+          .delete()
+          .eq("id", id)
+          .select();
+
+        if (byIdError) {
+          console.error(`Supabase deleteProject (id: ${id}) error:`, byIdError);
+          throw new Error(
+            `Supabase error: ${byIdError.message} (Code: ${byIdError.code || "UNKNOWN"})`
+          );
+        }
+
+        if (byIdData && byIdData.length > 0) {
+          const localData = ensureDb();
+          localData.projects = localData.projects.filter((p) => p.id !== id && p.slug !== id);
+          writeDb(localData);
           return true;
         }
-        console.error("Supabase deleteProject error:", error);
+
+        // If not matched by id, fallback to deleting by slug
+        const { data: bySlugData, error: bySlugError } = await supabase
+          .from("projects")
+          .delete()
+          .eq("slug", id)
+          .select();
+
+        if (bySlugError) {
+          console.error(`Supabase deleteProject (slug: ${id}) error:`, bySlugError);
+          throw new Error(
+            `Supabase error: ${bySlugError.message} (Code: ${bySlugError.code || "UNKNOWN"})`
+          );
+        }
+
+        if (bySlugData && bySlugData.length > 0) {
+          const localData = ensureDb();
+          localData.projects = localData.projects.filter((p) => p.id !== id && p.slug !== id);
+          writeDb(localData);
+          return true;
+        }
+
+        console.warn(`Supabase deleteProject: No rows found matching id or slug '${id}'.`);
       }
     }
 
     const data = ensureDb();
     const prevLen = data.projects.length;
-    data.projects = data.projects.filter((p) => p.id !== id);
+    data.projects = data.projects.filter((p) => p.id !== id && p.slug !== id);
     if (data.projects.length !== prevLen) {
       writeDb(data);
       return true;

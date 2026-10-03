@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { Modal } from "@/components/ui/Modal";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { Toast } from "@/components/ui/Toast";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { Project } from "@/types";
 
@@ -29,6 +30,8 @@ export default function AdminProjectsPage() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [deleteTarget, setDeleteTarget] = useState<Project | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [toast, setToast] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   const filteredProjects = useMemo(() => {
     return projects.filter((p) => {
@@ -53,15 +56,35 @@ export default function AdminProjectsPage() {
     });
   };
 
-  const confirmDelete = () => {
-    if (deleteTarget) {
-      deleteProject(deleteTarget.id);
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setIsDeleting(true);
+    try {
+      await deleteProject(deleteTarget.id);
+      setToast({
+        type: "success",
+        message: `Project "${deleteTarget.title}" berhasil dihapus secara permanen.`,
+      });
       setDeleteTarget(null);
+    } catch (err: any) {
+      setToast({
+        type: "error",
+        message: err.message || "Gagal menghapus project dari database.",
+      });
+    } finally {
+      setIsDeleting(false);
     }
   };
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 relative">
+      {toast && (
+        <Toast
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
       <AdminTopbar
         title="Projects"
         subtitle="Manage case studies, drafts, featured ordering, and tech stacks"
@@ -268,6 +291,7 @@ export default function AdminProjectsPage() {
         description={`Are you sure you want to permanently delete "${deleteTarget?.title}"? This action cannot be undone.`}
         confirmText="Delete Project"
         confirmVariant="danger"
+        isConfirmLoading={isDeleting}
         onConfirm={confirmDelete}
       />
     </div>
