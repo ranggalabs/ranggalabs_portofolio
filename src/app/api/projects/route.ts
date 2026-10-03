@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { apiResponse } from "@/lib/api-response";
 import { projectSchema } from "@/lib/validations";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function GET(req: NextRequest) {
   try {
@@ -34,6 +35,9 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const authError = await requireAdmin(req);
+    if (authError) return authError;
+
     const body = await req.json();
 
     const parseResult = projectSchema.safeParse(body);

@@ -2,10 +2,14 @@ import { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { apiSuccess, apiError } from "@/lib/api-response";
 import { inquirySchema } from "@/lib/validations";
+import { requireAdmin } from "@/lib/auth-guard";
 
 // GET /api/inquiries - Admin list of inquiries
 export async function GET(req: NextRequest) {
   try {
+    const authError = await requireAdmin(req);
+    if (authError) return authError;
+
     const { searchParams } = new URL(req.url);
     const status = searchParams.get("status") as "new" | "read" | "replied" | null;
 

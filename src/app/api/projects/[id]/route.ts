@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { apiResponse } from "@/lib/api-response";
 import { projectSchema } from "@/lib/validations";
+import { requireAdmin } from "@/lib/auth-guard";
 
 export async function GET(
   req: NextRequest,
@@ -27,6 +28,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const authError = await requireAdmin(req);
+    if (authError) return authError;
+
     const { id } = await params;
     const existing = await db.getProject(id);
 
@@ -71,6 +75,9 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const authError = await requireAdmin(req);
+    if (authError) return authError;
+
     const { id } = await params;
     const existing = await db.getProject(id);
 

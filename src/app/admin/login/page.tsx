@@ -1,39 +1,54 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Shield, ArrowRight, AlertCircle, KeyRound, ArrowLeft } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Shield, ArrowRight, AlertCircle, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
-export default function AdminLoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const from = searchParams.get("from") || "/admin";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    if (!email || !password) {
-      setError("Please fill in both email and password.");
+    if (!email.trim() || !password) {
+      setError("Mohon masukkan email dan password admin.");
       return;
     }
 
     setIsLoading(true);
-    setTimeout(() => {
-      // In this client demonstration, any valid email and password format lets the admin into the CMS
-      setIsLoading(false);
-      router.push("/admin");
-    }, 600);
-  };
 
-  const handleFillDemo = () => {
-    setEmail("admin@rangga.dev");
-    setPassword("portfolio-master-2024");
-    setError(null);
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim(), password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        setError(data.error?.message || "Email atau password yang Anda masukkan salah.");
+        return;
+      }
+
+      // Successful login -> Redirect to destination
+      router.push(from);
+      router.refresh();
+    } catch (err) {
+      setError("Terjadi kesalahan koneksi saat login. Silakan coba kembali.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -43,7 +58,7 @@ export default function AdminLoginPage() {
         className="absolute top-6 left-6 inline-flex items-center gap-2 text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text)] transition-colors focus-ring rounded-lg px-2 py-1"
       >
         <ArrowLeft className="w-4 h-4 stroke-[1.75]" />
-        <span>Back to Public Site</span>
+        <span>Kembali ke Website</span>
       </Link>
 
       <div className="w-full max-w-sm rounded-2xl bg-[var(--bg)] border border-[var(--border)] shadow-xl p-8 flex flex-col gap-6">
@@ -56,14 +71,14 @@ export default function AdminLoginPage() {
             CMS Admin Portal
           </h1>
           <p className="text-xs text-[var(--text-muted)]">
-            Single-user management panel for projects, media, and site content.
+            Akses terbatas hanya untuk pengelola portofolio.
           </p>
         </div>
 
         {/* Error Alert */}
         {error && (
-          <div className="p-3 rounded-lg bg-[var(--danger)]/10 border border-[var(--danger)]/30 text-[var(--danger)] flex items-center gap-2 text-xs">
-            <AlertCircle className="w-4 h-4 shrink-0 stroke-[1.75]" />
+          <div className="p-3 rounded-lg bg-[var(--danger)]/10 border border-[var(--danger)]/30 text-[var(--danger)] flex items-start gap-2 text-xs leading-relaxed">
+            <AlertCircle className="w-4 h-4 shrink-0 stroke-[1.75] mt-0.5" />
             <span>{error}</span>
           </div>
         )}
@@ -72,11 +87,13 @@ export default function AdminLoginPage() {
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-medium text-[var(--text)]">
-              Admin Email
+              Email Admin
             </label>
             <input
               type="email"
               placeholder="admin@rangga.dev"
+              autoComplete="username"
+              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="h-10 px-3 rounded-lg text-sm bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus-ring"
@@ -84,14 +101,14 @@ export default function AdminLoginPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <div className="flex items-center justify-between">
-              <label className="text-xs font-medium text-[var(--text)]">
-                Password
-              </label>
-            </div>
+            <label className="text-xs font-medium text-[var(--text)]">
+              Password
+            </label>
             <input
               type="password"
               placeholder="••••••••••••"
+              autoComplete="current-password"
+              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="h-10 px-3 rounded-lg text-sm bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus-ring"
@@ -106,20 +123,18 @@ export default function AdminLoginPage() {
             iconRight={<ArrowRight className="w-4 h-4 stroke-[1.75]" />}
             className="w-full mt-2"
           >
-            Sign In to CMS
+            Masuk ke Dashboard
           </Button>
-
-          {/* Quick Demo Helper */}
-          <button
-            type="button"
-            onClick={handleFillDemo}
-            className="w-full flex items-center justify-center gap-2 py-2 text-xs font-medium text-[var(--primary)] hover:underline cursor-pointer"
-          >
-            <KeyRound className="w-3.5 h-3.5 stroke-[1.75]" />
-            <span>Auto-fill Demo Credentials</span>
-          </button>
         </form>
       </div>
     </div>
+  );
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[var(--surface)] flex items-center justify-center text-xs text-[var(--text-muted)]">Memuat...</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }

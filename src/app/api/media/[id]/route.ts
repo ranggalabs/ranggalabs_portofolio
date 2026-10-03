@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { apiSuccess, apiError } from "@/lib/api-response";
 import { mediaUpdateSchema } from "@/lib/validations";
+import { requireAdmin } from "@/lib/auth-guard";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -34,6 +35,9 @@ export async function PATCH(
   { params }: RouteParams
 ) {
   try {
+    const authError = await requireAdmin(req);
+    if (authError) return authError;
+
     const { id } = await params;
     const body = await req.json();
 
@@ -60,10 +64,13 @@ export async function PATCH(
 
 // DELETE /api/media/[id]
 export async function DELETE(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: RouteParams
 ) {
   try {
+    const authError = await requireAdmin(req);
+    if (authError) return authError;
+
     const { id } = await params;
     const deleted = await db.deleteMedia(id);
 

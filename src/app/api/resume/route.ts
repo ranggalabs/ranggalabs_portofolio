@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { apiSuccess, apiError } from "@/lib/api-response";
 import { resumeSchema } from "@/lib/validations";
 import { isSupabaseConfigured, uploadToSupabaseStorage } from "@/lib/supabase";
+import { requireAdmin } from "@/lib/auth-guard";
 import fs from "fs";
 import path from "path";
 
@@ -21,6 +22,9 @@ export async function GET() {
 // PUT /api/resume
 export async function PUT(req: NextRequest) {
   try {
+    const authError = await requireAdmin(req);
+    if (authError) return authError;
+
     const contentType = req.headers.get("content-type") || "";
 
     if (contentType.includes("multipart/form-data")) {

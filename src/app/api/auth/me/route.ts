@@ -1,14 +1,16 @@
 import { NextRequest } from "next/server";
 import { apiResponse } from "@/lib/api-response";
+import { verifySessionToken, SESSION_COOKIE_NAME } from "@/lib/session";
 
 export async function GET(req: NextRequest) {
-  const session = req.cookies.get("admin_session")?.value;
+  const token = req.cookies.get(SESSION_COOKIE_NAME)?.value;
+  const { valid, email } = await verifySessionToken(token);
 
-  if (session === "authenticated") {
+  if (valid && email) {
     return apiResponse.success({
       authenticated: true,
       user: {
-        email: "admin@rangga.dev",
+        email,
         name: "Rangga Prasetya",
         role: "admin",
       },

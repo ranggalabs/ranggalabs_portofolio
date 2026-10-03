@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { apiSuccess, apiError } from "@/lib/api-response";
 import { siteSettingsSchema } from "@/lib/validations";
+import { requireAdmin } from "@/lib/auth-guard";
 
 // GET /api/settings
 export async function GET() {
@@ -17,6 +18,9 @@ export async function GET() {
 // PUT /api/settings
 export async function PUT(req: NextRequest) {
   try {
+    const authError = await requireAdmin(req);
+    if (authError) return authError;
+
     const body = await req.json();
     const parsed = siteSettingsSchema.safeParse(body);
 
