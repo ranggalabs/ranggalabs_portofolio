@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import {
@@ -22,12 +20,15 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { MetricItem } from "@/components/ui/MetricItem";
 import { TechChip } from "@/components/ui/TechChip";
-import { usePortfolio } from "@/context/PortfolioContext";
+import { db } from "@/lib/db";
 
-export default function HomePage() {
-  const { projects, profile } = usePortfolio();
+export default async function HomePage() {
+  const [projects, profile] = await Promise.all([
+    db.getProjects({ status: "published" }),
+    db.getProfile(),
+  ]);
 
-  const featuredProjects = projects.filter((p) => p.featured && p.status === "published").slice(0, 3);
+  const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
 
   const skillCategories = [
     {
@@ -63,11 +64,11 @@ export default function HomePage() {
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://ranggaprasetya.dev/#person",
+        "@id": "https://dealwithrangga.my.id/#person",
         name: profile.name,
         jobTitle: profile.headline,
         description: profile.bio,
-        url: "https://ranggaprasetya.dev",
+        url: "https://dealwithrangga.my.id",
         sameAs: [profile.github, profile.linkedin],
         address: {
           "@type": "PostalAddress",
@@ -77,11 +78,11 @@ export default function HomePage() {
       },
       {
         "@type": "WebSite",
-        "@id": "https://ranggaprasetya.dev/#website",
-        url: "https://ranggaprasetya.dev",
+        "@id": "https://dealwithrangga.my.id/#website",
+        url: "https://dealwithrangga.my.id",
         name: "Rangga Prasetya — Portfolio",
         publisher: {
-          "@id": "https://ranggaprasetya.dev/#person",
+          "@id": "https://dealwithrangga.my.id/#person",
         },
       },
     ],
@@ -202,8 +203,9 @@ export default function HomePage() {
             {skillCategories.map((category) => (
               <div
                 key={category.name}
-                className={`p-6 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex flex-col gap-4 ${category.spanTwo ? "lg:col-span-2" : ""
-                  }`}
+                className={`p-6 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex flex-col gap-4 ${
+                  category.spanTwo ? "lg:col-span-2" : ""
+                }`}
               >
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-lg bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-center shrink-0">

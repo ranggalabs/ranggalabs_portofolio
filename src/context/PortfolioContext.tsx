@@ -117,8 +117,12 @@ export function PortfolioProvider({
   }, []);
 
   useEffect(() => {
-    refreshData();
-  }, [refreshData]);
+    if (!initialData) {
+      refreshData();
+    } else {
+      setIsLoading(false);
+    }
+  }, [initialData, refreshData]);
 
   const getProjectBySlug = (slug: string) => {
     return projects.find((p) => p.slug === slug);

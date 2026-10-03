@@ -18,6 +18,8 @@ export function ProjectCard({ project, priority }: ProjectCardProps) {
     <article className="group flex flex-col rounded-xl overflow-hidden bg-[var(--surface)] border border-[var(--border)] transition-all duration-200 hover:shadow-md hover:border-[var(--primary)]/40">
       <Link
         href={`/projects/${project.slug}`}
+        tabIndex={-1}
+        aria-hidden="true"
         className="block relative aspect-video w-full overflow-hidden bg-[var(--surface-2)]"
       >
         <Image

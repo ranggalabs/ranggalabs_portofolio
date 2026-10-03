@@ -1,10 +1,23 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { db } from "@/lib/db";
 
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
+});
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ranggaprasetya.dev"),
+  metadataBase: new URL("https://dealwithrangga.my.id"),
   title: {
     default: "Rangga Prasetya — Fullstack Developer",
     template: "%s | Rangga Prasetya",
@@ -22,12 +35,12 @@ export const metadata: Metadata = {
     "Bandung",
     "Indonesia",
   ],
-  authors: [{ name: "Rangga Prasetya", url: "https://ranggaprasetya.dev" }],
+  authors: [{ name: "Rangga Prasetya", url: "https://dealwithrangga.my.id" }],
   creator: "Rangga Prasetya",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ranggaprasetya.dev",
+    url: "https://dealwithrangga.my.id",
     siteName: "Rangga Prasetya Portfolio",
     title: "Rangga Prasetya — Fullstack Developer",
     description:
@@ -97,18 +110,12 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
         <link rel="icon" href="/images/ranggalabs.png" sizes="any" />
       </head>
       <body className="min-h-screen flex flex-col font-sans antialiased bg-[var(--bg)] text-[var(--text)] selection:bg-[var(--primary)] selection:text-[var(--on-primary)]">
