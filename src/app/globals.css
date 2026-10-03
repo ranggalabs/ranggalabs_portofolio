@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg: #FFFFFF;
+    --surface: #F7F8FA;
+    --surface-2: #EEF0F3;
+    --border: #E2E5EA;
+    --text: #0F1419;
+    --text-muted: #5B6472;
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+    --on-primary: #FFFFFF;
+    --success: #16A34A;
+    --warning: #D97706;
+    --danger: #DC2626;
+
+    --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .dark {
+    --bg: #0B0D10;
+    --surface: #12151A;
+    --surface-2: #1A1E25;
+    --border: #262B33;
+    --text: #F2F4F7;
+    --text-muted: #9AA3B2;
+    --primary: #5B8DEF;
+    --primary-hover: #7BA3F3;
+    --on-primary: #0B0D10;
+    --success: #4ADE80;
+    --warning: #FBBF24;
+    --danger: #F87171;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-inter);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--on-primary);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Typography styles matching Stitch & PRD scale */
+.font-display {
+  font-family: var(--font-inter);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+}
+
+/* Focus ring standard */
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Animations matching PRD (subtle, transform/opacity only) */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-cursor-blink {
+  animation: cursorBlink 1s infinite;
+}

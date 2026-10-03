@@ -1,0 +1,580 @@
+{
+  "projects": [
+    {
+      "id": "proj-1790663026374",
+      "title": "contoh123",
+      "slug": "contoh123",
+      "summary": "contoh123456",
+      "coverImage": "/uploads/1790663035862-slide_1.png",
+      "coverAlt": "slide_1",
+      "category": "fullstack",
+      "categoryDisplay": "FULLSTACK",
+      "role": "Fullstack Developer",
+      "year": "2026",
+      "clientName": "contoh123",
+      "clientType": "Commercial / Enterprise",
+      "techStack": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Next123"
+      ],
+      "liveUrl": "https://www.linkedin.com/in/ranggaprasetya/",
+      "repoUrl": "https://www.threads.com/?hl=id",
+      "problem": "contoh1111",
+      "solution": "contoh123",
+      "result": "contoh1111",
+      "metrics": [
+        {
+          "id": "m1",
+          "label": "Performance Gain",
+          "value": "+45%"
+        }
+      ],
+      "gallery": [],
+      "featured": false,
+      "order": 1,
+      "status": "published",
+      "seoTitle": "",
+      "seoDescription": "",
+      "updatedAt": "2026-09-29"
+    },
+    {
+      "id": "proj-1",
+      "title": "Angkot To School (DISHUB Kota Bandung)",
+      "slug": "angkot-to-school",
+      "summary": "Real-time public transit tracking and safe route recommendation system for primary and secondary students across Bandung.",
+      "coverImage": "/images/angkot_to_school-63d994.png",
+      "coverAlt": "Angkot To School public transit tracking dashboard preview",
+      "category": "fullstack",
+      "categoryDisplay": "WEB APPLICATION",
+      "role": "Lead Fullstack & IoT Architect",
+      "year": "2024",
+      "clientName": "DISHUB Kota Bandung",
+      "clientType": "Government / Municipal Agency",
+      "techStack": [
+        "React",
+        "Leaflet.js",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "WebSockets"
+      ],
+      "liveUrl": "https://angkot-school.bandung.go.id",
+      "repoUrl": "https://github.com/ranggaprasetya/angkot-school",
+      "problem": "Public minibuses (Angkot) in Bandung lacked predictable scheduling and live tracking, causing parent anxiety, erratic student commute times, and inefficient route dispatch for municipal transport authorities.",
+      "solution": "Engineered an end-to-end telematics gateway utilizing high-frequency GPS telemetry, low-latency WebSockets, Leaflet.js real-time map clustering, and automated geofencing notifications alerting parents when vehicles approach school zones.",
+      "result": "Formally adopted by DISHUB Kota Bandung across 14 high-volume school routes. Successfully reduced average student waiting times by 34% and serves over 12,400 active student passengers every school morning.",
+      "metrics": [
+        {
+          "id": "m1",
+          "label": "Active Daily Students",
+          "value": "12,400+"
+        },
+        {
+          "id": "m2",
+          "label": "Transit Delay Reduction",
+          "value": "34%"
+        },
+        {
+          "id": "m3",
+          "label": "Fleet Telematics Uptime",
+          "value": "99.94%"
+        }
+      ],
+      "gallery": [
+        "/images/angkot_detail_hero-21d03b.png",
+        "/images/gallery_fleet_dispatch-26a8dd.png",
+        "/images/gallery_mobile_route-26a8dd.png"
+      ],
+      "featured": true,
+      "order": 1,
+      "status": "published",
+      "seoTitle": "Angkot To School — Municipal Transit Tracking Case Study",
+      "seoDescription": "Case study on building real-time GPS fleet tracking and student safety geofencing with React, Leaflet, and Node.js for Dishub Kota Bandung.",
+      "updatedAt": "2024-11-20"
+    },
+    {
+      "id": "proj-2",
+      "title": "Smart Parking IoT System",
+      "slug": "smart-parking-iot-system",
+      "summary": "Automated barrier control and slot occupancy sensor dashboard using ESP32 edge telemetry and cloud state sync.",
+      "coverImage": "/images/smart_parking-7bdf3b.png",
+      "coverAlt": "Smart Parking IoT System occupancy monitoring console",
+      "category": "iot",
+      "categoryDisplay": "IOT & CLOUD",
+      "role": "IoT Firmware & Backend Engineer",
+      "year": "2024",
+      "clientName": "Bandung Urban Hub",
+      "clientType": "Commercial Facility",
+      "techStack": [
+        "ESP32",
+        "TypeScript",
+        "Supabase",
+        "MQTT Protocol",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "liveUrl": "https://smartparking.rangga.dev",
+      "repoUrl": "https://github.com/ranggaprasetya/smart-parking-iot",
+      "problem": "Commercial multi-tier parking complexes suffered from severe ingress congestion due to uncoordinated manual ticket gates and absent live vacancy indications per parking bay level.",
+      "solution": "Architected ultrasonic wireless sensor clusters on custom ESP32 microcontrollers communicating over MQTT to Supabase Realtime, integrated with an automatic license-plate gate actuator and live floor occupancy LED signs.",
+      "result": "Cut median vehicle search times from 9.2 minutes to 3.1 minutes (66% improvement) across 450 bays, while saving 18% in facility lighting power consumption through dynamic bay sensors.",
+      "metrics": [
+        {
+          "id": "m1",
+          "label": "Search Time Reduction",
+          "value": "-66%"
+        },
+        {
+          "id": "m2",
+          "label": "Occupancy Precision",
+          "value": "99.2%"
+        },
+        {
+          "id": "m3",
+          "label": "Sensor Latency",
+          "value": "85ms"
+        }
+      ],
+      "gallery": [
+        "/images/smart_parking-7bdf3b.png"
+      ],
+      "featured": true,
+      "order": 2,
+      "status": "published",
+      "seoTitle": "Smart Parking IoT System — ESP32 & Supabase Realtime Architecture",
+      "seoDescription": "Automated smart parking infrastructure utilizing ESP32 firmware, MQTT, and Supabase Realtime dashboards.",
+      "updatedAt": "2024-10-15"
+    },
+    {
+      "id": "proj-3",
+      "title": "Threadibility",
+      "slug": "threadibility",
+      "summary": "Chrome extension and web service for accessible multi-thread discussion parsing and semantic tree visualization.",
+      "coverImage": "/images/threadibility-63d994.png",
+      "coverAlt": "Threadibility discussion parsing tool",
+      "category": "frontend",
+      "categoryDisplay": "BROWSER TOOL",
+      "role": "Frontend Developer & Extension Author",
+      "year": "2023",
+      "clientName": "Open Source Initiative",
+      "clientType": "Developer Tool",
+      "techStack": [
+        "Next.js",
+        "PostgreSQL",
+        "Tailwind",
+        "React",
+        "TypeScript"
+      ],
+      "liveUrl": "https://threadibility.app",
+      "repoUrl": "https://github.com/ranggaprasetya/threadibility",
+      "problem": "Deeply nested forum discussions and GitHub issue comments are challenging for screen readers and keyboard-only power users to navigate cleanly without getting lost in branches.",
+      "solution": "Created a client-side tree parser extension that flattens conversations into an accessible semantic outline with instant keyboard shortcuts, speaker sentiment categorization, and branch collapsing.",
+      "result": "Grew to over 4,500 active weekly developers on the Chrome Web Store, earning a 4.9/5 average rating and an Accessibility Excellence award.",
+      "metrics": [
+        {
+          "id": "m1",
+          "label": "Active Extension Users",
+          "value": "4,500+"
+        },
+        {
+          "id": "m2",
+          "label": "Average Rating",
+          "value": "4.9 / 5.0"
+        },
+        {
+          "id": "m3",
+          "label": "WCAG AA Contrast",
+          "value": "100%"
+        }
+      ],
+      "gallery": [
+        "/images/threadibility-63d994.png"
+      ],
+      "featured": true,
+      "order": 3,
+      "status": "published",
+      "seoTitle": "Threadibility — Accessible Forum Discussion Parsing Extension",
+      "seoDescription": "Chrome extension and web app providing accessible tree outlines for developer discussions and forums.",
+      "updatedAt": "2024-08-05"
+    },
+    {
+      "id": "proj-4",
+      "title": "Wawasan Bela Negara Quiz",
+      "slug": "wawasan-bela-negara-quiz",
+      "summary": "Gamified educational assessment platform with adaptive question difficulty and real-time national leaderboard.",
+      "coverImage": "/images/wawasan_bela_negara-57eb80.png",
+      "coverAlt": "Wawasan Bela Negara Quiz gamified UI",
+      "category": "frontend",
+      "categoryDisplay": "WEB APPLICATION",
+      "role": "Fullstack Developer",
+      "year": "2023",
+      "clientName": "National Education Foundation",
+      "clientType": "Education / EdTech",
+      "techStack": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Supabase",
+        "PostgreSQL"
+      ],
+      "liveUrl": "https://belanegara-quiz.id",
+      "repoUrl": "https://github.com/ranggaprasetya/belanegara-quiz",
+      "problem": "Traditional civic education tests suffered from low student engagement and lack of interactive formative feedback.",
+      "solution": "Built a timed, interactive quiz app with animated progression bars, score multiplication streaks, and anti-cheat session validation.",
+      "result": "Engaged over 28,000 student quiz sessions in its first 3 months with 91% completion rates.",
+      "metrics": [
+        {
+          "id": "m1",
+          "label": "Quizzes Completed",
+          "value": "28,000+"
+        },
+        {
+          "id": "m2",
+          "label": "Completion Rate",
+          "value": "91%"
+        }
+      ],
+      "gallery": [
+        "/images/wawasan_bela_negara-57eb80.png"
+      ],
+      "featured": false,
+      "order": 4,
+      "status": "published",
+      "updatedAt": "2023-12-10"
+    },
+    {
+      "id": "proj-5",
+      "title": "Jabar Logistics Fleet Dispatch",
+      "slug": "jabar-logistics-fleet-dispatch",
+      "summary": "Centralized route optimization and delivery dispatch console handling multi-stop regional freight distribution.",
+      "coverImage": "/images/jabar_logistics-1e5a98.png",
+      "coverAlt": "Jabar Logistics dispatch console overview",
+      "category": "backend",
+      "categoryDisplay": "ENTERPRISE LOGISTICS",
+      "role": "Backend Architect",
+      "year": "2023",
+      "clientName": "PT Logistik Jawa Barat",
+      "clientType": "Logistics Enterprise",
+      "techStack": [
+        "Go",
+        "PostgreSQL",
+        "Redis",
+        "Docker",
+        "React",
+        "REST APIs"
+      ],
+      "liveUrl": "https://dispatch.jabarlogistics.co.id",
+      "repoUrl": "https://github.com/ranggaprasetya/jabar-dispatch",
+      "problem": "Regional couriers faced high fuel overheads due to manual static route planning across mountainous West Java regions.",
+      "solution": "Engineered an automated traveling-salesperson route grouping microservice in Go, backed by Redis geo-spatial caches and async queue workers.",
+      "result": "Decreased average route mileage by 19% across 80 delivery vans operating out of 4 hub centers.",
+      "metrics": [
+        {
+          "id": "m1",
+          "label": "Route Mileage Savings",
+          "value": "19%"
+        },
+        {
+          "id": "m2",
+          "label": "Dispatch Latency",
+          "value": "< 120ms"
+        }
+      ],
+      "gallery": [
+        "/images/jabar_logistics-1e5a98.png"
+      ],
+      "featured": false,
+      "order": 5,
+      "status": "published",
+      "updatedAt": "2023-09-18"
+    },
+    {
+      "id": "proj-6",
+      "title": "EcoSense Environmental Telemetry",
+      "slug": "ecosense-environmental-telemetry",
+      "summary": "Solar-powered environmental monitoring station array streaming air quality, humidity, and temperature data.",
+      "coverImage": "/images/ecosense-57eb80.png",
+      "coverAlt": "EcoSense weather telemetry station",
+      "category": "iot",
+      "categoryDisplay": "IOT & TELEMETRY",
+      "role": "Embedded Systems Developer",
+      "year": "2022",
+      "clientName": "Research Institute Bandung",
+      "clientType": "Environmental Research",
+      "techStack": [
+        "ESP32",
+        "MQTT Protocol",
+        "Node.js",
+        "TimescaleDB",
+        "Sensor Telemetry"
+      ],
+      "liveUrl": "https://ecosense.rangga.dev",
+      "repoUrl": "https://github.com/ranggaprasetya/ecosense-iot",
+      "problem": "Micro-climate variations in highland agricultural plots required frequent localized humidity and particulate readings without reliable cellular wall power.",
+      "solution": "Built solar-powered ESP32 nodes sleeping at 15uA, waking every 15 minutes to sample PMS5003 and BME280 sensors before beaming payloads via LoRaWAN/MQTT.",
+      "result": "Deployed 12 autonomous stations running non-stop for 18 months without battery replacement.",
+      "metrics": [
+        {
+          "id": "m1",
+          "label": "Autonomous Operation",
+          "value": "18 Months"
+        },
+        {
+          "id": "m2",
+          "label": "Telemetry Accuracy",
+          "value": "98.8%"
+        }
+      ],
+      "gallery": [
+        "/images/ecosense-57eb80.png"
+      ],
+      "featured": false,
+      "order": 6,
+      "status": "published",
+      "updatedAt": "2023-04-12"
+    }
+  ],
+  "profile": {
+    "name": "Rangga Prasetya",
+    "headline": "Fullstack Developer",
+    "bio": "Fullstack developer with a passion for high-performance web applications, IoT integration, and human-centered user experiences based in Bandung, Indonesia. Over 3 years building reliable software solutions spanning municipal smart city platforms, edge IoT systems, and high-speed web apps.",
+    "photo": "/uploads/1790711425440-WhatsApp_Image_2026-09-30_at_01.14.04.jpeg",
+    "location": "Bandung, Indonesia (UTC+7)",
+    "availability": "Available for projects",
+    "isAvailable": true,
+    "email": "ranggahd321@gmail.com",
+    "phone": "082121719679",
+    "github": "https://github.com/ranggalabs",
+    "linkedin": "https://www.linkedin.com/in/ranggaprasetya/",
+    "socialLinks": [
+      {
+        "platform": "GitHub",
+        "url": "https://github.com/ranggaprasetya"
+      },
+      {
+        "platform": "LinkedIn",
+        "url": "https://linkedin.com/in/ranggaprasetya"
+      },
+      {
+        "platform": "Email",
+        "url": "mailto:rangga.prasetya@example.com"
+      }
+    ],
+    "experiences": [
+      {
+        "id": "exp-1",
+        "role": "Lead Fullstack & IoT Engineer",
+        "company": "Rangga Labs & Municipal Initiatives",
+        "period": "2024 — Present",
+        "location": "Bandung, Indonesia",
+        "description": "Architecting distributed transit telematics (Angkot To School) for Dishub Kota Bandung, smart parking sensor arrays with ESP32 edge telemetry, and fullstack cloud architectures."
+      },
+      {
+        "id": "exp-2",
+        "role": "Fullstack Web Developer",
+        "company": "Digital Studio & Freelance",
+        "period": "2022 — 2023",
+        "location": "Bandung, Indonesia",
+        "description": "Built custom web applications, Chrome developer extensions (Threadibility), interactive quiz systems, and high-performance client websites using React, Next.js, and PostgreSQL."
+      },
+      {
+        "id": "exp-3",
+        "role": "Embedded Systems & Firmware Developer",
+        "company": "IoT & Hardware Projects",
+        "period": "2021 — 2022",
+        "location": "Bandung, Indonesia",
+        "description": "Designed micro-controller firmware on ESP32/Arduino, calibrated multi-sensor telemetry (PMS5003, BME280), and developed MQTT communication bridges with cloud databases."
+      }
+    ],
+    "education": [
+      {
+        "id": "edu-1",
+        "degree": "Bachelor of Computer Science / Informatics",
+        "institution": "Universitas di Bandung",
+        "period": "2019 — 2023",
+        "description": "Focused on Distributed Systems, Network Architecture, Software Engineering, and Internet of Things."
+      }
+    ],
+    "certifications": [
+      {
+        "id": "cert-1",
+        "title": "Fullstack Web Architecture & Cloud Systems",
+        "issuer": "Advanced Engineering Certification",
+        "year": "2023"
+      },
+      {
+        "id": "cert-2",
+        "title": "Embedded Systems with ESP32 & FreeRTOS",
+        "issuer": "Hardware & IoT Systems",
+        "year": "2022"
+      },
+      {
+        "id": "cert-3",
+        "title": "PostgreSQL Database Performance Tuning",
+        "issuer": "Database Engineering Institute",
+        "year": "2022"
+      }
+    ]
+  },
+  "resumeSettings": {
+    "fileName": "CV_Rangga_Prasetya_Template.pdf",
+    "versionLabel": "v2.5",
+    "fileSize": "221 KB",
+    "updatedAt": "2026-09-29",
+    "publicUrl": "/cv.pdf"
+  },
+  "siteSettings": {
+    "siteName": "Rangga Prasetya — Portfolio & CMS",
+    "siteUrl": "https://ranggaprasetya.dev",
+    "defaultSeoTitle": "Rangga Prasetya — Fullstack Developer",
+    "defaultSeoDescription": "Fullstack developer with a passion for high-performance web applications, IoT integration, and human-centered user experiences based in Bandung, Indonesia.",
+    "defaultOgImage": "/images/angkot_to_school-63d994.png",
+    "contactEmail": "rangga.prasetya@example.com"
+  },
+  "mediaItems": [
+    {
+      "fileName": "WhatsApp Image 2026-09-30 at 01.14.04.jpeg",
+      "url": "/uploads/1790711425440-WhatsApp_Image_2026-09-30_at_01.14.04.jpeg",
+      "size": "84.1 KB",
+      "dimensions": "Auto",
+      "alt": "Rangga Prasetya profile photo",
+      "id": "med-1790711425465",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "fileName": "WhatsApp Image 2026-09-30 at 01.14.04.jpeg",
+      "url": "/uploads/1790711425440-WhatsApp_Image_2026-09-30_at_01.14.04.jpeg",
+      "size": "84.1 KB",
+      "dimensions": "Auto",
+      "alt": "Rangga Prasetya profile photo",
+      "id": "med-1790711425442",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "fileName": "test_avatar_photo.png",
+      "url": "/uploads/1790710156751-test_avatar_photo.png",
+      "size": "0.1 KB",
+      "dimensions": "Auto",
+      "alt": "Test Avatar Photo",
+      "id": "med-1790710156756",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "fileName": "test_avatar_photo.png",
+      "url": "/uploads/1790710083497-test_avatar_photo.png",
+      "size": "0.1 KB",
+      "dimensions": "Auto",
+      "alt": "Test Avatar Photo",
+      "id": "med-1790710083499",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "fileName": "slide_1.png",
+      "url": "/uploads/1790663035862-slide_1.png",
+      "size": "561.1 KB",
+      "dimensions": "Auto",
+      "alt": "slide_1",
+      "id": "med-1790663035888",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "fileName": "slide_1.png",
+      "url": "/uploads/1790663035862-slide_1.png",
+      "size": "561.1 KB",
+      "dimensions": "Auto",
+      "alt": "slide_1",
+      "id": "med-1790663035864",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "fileName": "my-new-cover-test.png",
+      "url": "/uploads/1790662932921-my-new-cover-test.png",
+      "size": "0.1 KB",
+      "dimensions": "Auto",
+      "alt": "Modern Telematics Gateway Architecture Diagram",
+      "id": "med-1790662932923",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "id": "med-1",
+      "fileName": "angkot_to_school-63d994.png",
+      "url": "/images/angkot_to_school-63d994.png",
+      "size": "194 KB",
+      "dimensions": "1280x720",
+      "alt": "Angkot To School public transit tracking dashboard preview",
+      "caption": "Hero cover image for Angkot To School project",
+      "createdAt": "2024-11-10"
+    },
+    {
+      "id": "med-2",
+      "fileName": "smart_parking-7bdf3b.png",
+      "url": "/images/smart_parking-7bdf3b.png",
+      "size": "216 KB",
+      "dimensions": "1280x720",
+      "alt": "Smart Parking IoT System occupancy monitoring console",
+      "caption": "Dashboard view of multi-level slot occupancy",
+      "createdAt": "2024-10-12"
+    },
+    {
+      "id": "med-3",
+      "fileName": "threadibility-63d994.png",
+      "url": "/images/threadibility-63d994.png",
+      "size": "154 KB",
+      "dimensions": "1280x720",
+      "alt": "Threadibility discussion parsing tool",
+      "caption": "Chrome extension conversation tree visualizer",
+      "createdAt": "2024-08-01"
+    },
+    {
+      "id": "med-4",
+      "fileName": "profile_rangga-7ca715.png",
+      "url": "/images/profile_rangga-7ca715.png",
+      "size": "133 KB",
+      "dimensions": "800x800",
+      "alt": "Rangga Prasetya portrait photo",
+      "caption": "Official avatar and profile photo",
+      "createdAt": "2024-07-15"
+    },
+    {
+      "id": "med-5",
+      "fileName": "angkot_detail_hero-21d03b.png",
+      "url": "/images/angkot_detail_hero-21d03b.png",
+      "size": "188 KB",
+      "dimensions": "1440x810",
+      "alt": "Angkot To School Dishub telematics full dashboard",
+      "caption": "Case study hero presentation banner",
+      "createdAt": "2024-11-12"
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "inq-1",
+      "name": "Ahmad Fauzi",
+      "email": "ahmad.fauzi@smartcity.id",
+      "subject": "Municipal Bus Tracking Collaboration",
+      "message": "Halo Rangga, kami tertarik dengan implementasi sistem Angkot To School Anda untuk Dishub Bandung. Kami sedang mengembangkan inisiatif serupa di Jawa Timur dan ingin mendiskusikan peluang kolaborasi teknis atau konsultasi sistem.",
+      "createdAt": "2024-11-25T14:32:00Z",
+      "status": "read"
+    },
+    {
+      "id": "inq-2",
+      "name": "Sarah Jenkins",
+      "email": "sarah.jenkins@techrecruiting.co",
+      "subject": "Senior Fullstack Engineer Opportunity (Remote)",
+      "message": "Hi Rangga! I came across your portfolio and was very impressed with your work on Threadibility and your IoT projects. We have an exciting remote fullstack position focusing on Next.js and high-scale backends. Let's connect!",
+      "createdAt": "2024-11-22T09:15:00Z",
+      "status": "read"
+    },
+    {
+      "id": "inq-3",
+      "name": "Budi Santoso",
+      "email": "budi@indonesiakreatif.org",
+      "subject": "Webinar Pembicara: Mengembangkan IoT dengan Edge Computing",
+      "message": "Selamat siang Mas Rangga, kami mengundang Anda untuk menjadi narasumber dalam webinar teknologi IoT kami bulan depan.",
+      "createdAt": "2024-11-18T16:45:00Z",
+      "status": "read"
+    }
+  ]
+}
